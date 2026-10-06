@@ -1,12 +1,13 @@
-import viteTsConfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vitest/config";
+import packageJson from "./package.json";
 
 export default defineConfig({
-  plugins: [
-    viteTsConfigPaths({
-      projects: ["./tsconfig.json"],
-    }),
-  ],
+  define: {
+    __APP_VERSION__: JSON.stringify(packageJson.version),
+  },
+  resolve: {
+    tsconfigPaths: true,
+  },
   test: {
     environment: "node",
     include: ["src/**/*.test.ts", "scripts/**/*.test.ts"],
